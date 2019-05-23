@@ -1,0 +1,12 @@
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Abstract\obj\Debug\E_commerce.Abstract.csprojResolveAssemblyReference.cache
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Abstract\bin\Debug\E_commerce.Abstract.dll.config
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Abstract\bin\Debug\E_commerce.Abstract.dll
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Abstract\bin\Debug\E_commerce.Abstract.pdb
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Abstract\bin\Debug\EntityFramework.dll
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Abstract\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Abstract\bin\Debug\E_commerce.Data.dll
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Abstract\bin\Debug\E_commerce.Data.pdb
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Abstract\bin\Debug\EntityFramework.xml
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Abstract\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Abstract\obj\Debug\E_commerce.Abstract.dll
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Abstract\obj\Debug\E_commerce.Abstract.pdb

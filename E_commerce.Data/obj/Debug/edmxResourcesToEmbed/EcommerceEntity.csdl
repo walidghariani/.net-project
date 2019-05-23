@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="id_admin" />
+    </Key>
+    <Property Name="id_admin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="pasword" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Cataloge">
+    <Key>
+      <PropertyRef Name="id_catalogie" />
+    </Key>
+    <Property Name="id_catalogie" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="date_de_creation" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Produit" Relationship="Self.FK_Produit_Cataloge" FromRole="Cataloge" ToRole="Produit" />
+  </EntityType>
+  <EntityType Name="Commande">
+    <Key>
+      <PropertyRef Name="id_commande" />
+    </Key>
+    <Property Name="id_commande" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="date" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="adresse_livraison" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="delai_livraison" Type="Int32" />
+    <Property Name="total" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="id_client" Type="Int32" />
+    <NavigationProperty Name="Utilisateur" Relationship="Self.FK_Commande_Utilisateur" FromRole="Commande" ToRole="Utilisateur" />
+    <NavigationProperty Name="Panier" Relationship="Self.FK_Panier_Commande" FromRole="Commande" ToRole="Panier" />
+  </EntityType>
+  <EntityType Name="Panier">
+    <Key>
+      <PropertyRef Name="id_panier" />
+    </Key>
+    <Property Name="id_panier" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="prixtotal" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="id_client" Type="Int32" />
+    <Property Name="id_cmd" Type="Int32" />
+    <NavigationProperty Name="Commande" Relationship="Self.FK_Panier_Commande" FromRole="Panier" ToRole="Commande" />
+    <NavigationProperty Name="Utilisateur" Relationship="Self.FK_Panier_Utilisateur" FromRole="Panier" ToRole="Utilisateur" />
+    <NavigationProperty Name="Quantité_produit" Relationship="Self.FK_Quantité_produit_Panier" FromRole="Panier" ToRole="Quantité_produit" />
+  </EntityType>
+  <EntityType Name="Photo">
+    <Key>
+      <PropertyRef Name="id_photo" />
+    </Key>
+    <Property Name="id_photo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emplacement" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Produit" Relationship="Self.FK_Produit_Photo" FromRole="Photo" ToRole="Produit" />
+  </EntityType>
+  <EntityType Name="Produit">
+    <Key>
+      <PropertyRef Name="id_produit" />
+    </Key>
+    <Property Name="id_produit" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="prix" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="type" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="nb_produit" Type="Int32" />
+    <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="id_photo" Type="Int32" />
+    <Property Name="id_catalogue" Type="Int32" />
+    <NavigationProperty Name="Cataloge" Relationship="Self.FK_Produit_Cataloge" FromRole="Produit" ToRole="Cataloge" />
+    <NavigationProperty Name="Photo" Relationship="Self.FK_Produit_Photo" FromRole="Produit" ToRole="Photo" />
+    <NavigationProperty Name="Quantité_produit" Relationship="Self.FK_Quantité_produit_Produit" FromRole="Produit" ToRole="Quantité_produit" />
+  </EntityType>
+  <EntityType Name="Quantité_produit">
+    <Key>
+      <PropertyRef Name="id_qt" />
+    </Key>
+    <Property Name="id_qt" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="quantite_produit" Type="Int32" />
+    <Property Name="prix" Type="Decimal" Precision="19" Scale="4" />
+    <Property Name="id_produit" Type="Int32" />
+    <Property Name="id_panier" Type="Int32" />
+    <NavigationProperty Name="Panier" Relationship="Self.FK_Quantité_produit_Panier" FromRole="Quantité_produit" ToRole="Panier" />
+    <NavigationProperty Name="Produit" Relationship="Self.FK_Quantité_produit_Produit" FromRole="Quantité_produit" ToRole="Produit" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Utilisateur">
+    <Key>
+      <PropertyRef Name="id_client" />
+    </Key>
+    <Property Name="id_client" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="username" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="nom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="prenom" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="adresse" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="tel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Commande" Relationship="Self.FK_Commande_Utilisateur" FromRole="Utilisateur" ToRole="Commande" />
+    <NavigationProperty Name="Panier" Relationship="Self.FK_Panier_Utilisateur" FromRole="Utilisateur" ToRole="Panier" />
+  </EntityType>
+  <Association Name="FK_Produit_Cataloge">
+    <End Role="Cataloge" Type="Self.Cataloge" Multiplicity="0..1" />
+    <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cataloge">
+        <PropertyRef Name="id_catalogie" />
+      </Principal>
+      <Dependent Role="Produit">
+        <PropertyRef Name="id_catalogue" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Commande_Utilisateur">
+    <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="0..1" />
+    <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="id_client" />
+      </Principal>
+      <Dependent Role="Commande">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Panier_Commande">
+    <End Role="Commande" Type="Self.Commande" Multiplicity="0..1" />
+    <End Role="Panier" Type="Self.Panier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commande">
+        <PropertyRef Name="id_commande" />
+      </Principal>
+      <Dependent Role="Panier">
+        <PropertyRef Name="id_cmd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Panier_Utilisateur">
+    <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="0..1" />
+    <End Role="Panier" Type="Self.Panier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="id_client" />
+      </Principal>
+      <Dependent Role="Panier">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quantité_produit_Panier">
+    <End Role="Panier" Type="Self.Panier" Multiplicity="0..1" />
+    <End Role="Quantité_produit" Type="Self.Quantité_produit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Panier">
+        <PropertyRef Name="id_panier" />
+      </Principal>
+      <Dependent Role="Quantité_produit">
+        <PropertyRef Name="id_panier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Produit_Photo">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="0..1" />
+    <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="id_photo" />
+      </Principal>
+      <Dependent Role="Produit">
+        <PropertyRef Name="id_photo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quantité_produit_Produit">
+    <End Role="Produit" Type="Self.Produit" Multiplicity="0..1" />
+    <End Role="Quantité_produit" Type="Self.Quantité_produit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produit">
+        <PropertyRef Name="id_produit" />
+      </Principal>
+      <Dependent Role="Quantité_produit">
+        <PropertyRef Name="id_produit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Admin" EntityType="Self.Admin" />
+    <EntitySet Name="Cataloge" EntityType="Self.Cataloge" />
+    <EntitySet Name="Commande" EntityType="Self.Commande" />
+    <EntitySet Name="Panier" EntityType="Self.Panier" />
+    <EntitySet Name="Photo" EntityType="Self.Photo" />
+    <EntitySet Name="Produit" EntityType="Self.Produit" />
+    <EntitySet Name="Quantité_produit" EntityType="Self.Quantité_produit" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" />
+    <AssociationSet Name="FK_Produit_Cataloge" Association="Self.FK_Produit_Cataloge">
+      <End Role="Cataloge" EntitySet="Cataloge" />
+      <End Role="Produit" EntitySet="Produit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Commande_Utilisateur" Association="Self.FK_Commande_Utilisateur">
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+      <End Role="Commande" EntitySet="Commande" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Panier_Commande" Association="Self.FK_Panier_Commande">
+      <End Role="Commande" EntitySet="Commande" />
+      <End Role="Panier" EntitySet="Panier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Panier_Utilisateur" Association="Self.FK_Panier_Utilisateur">
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+      <End Role="Panier" EntitySet="Panier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quantité_produit_Panier" Association="Self.FK_Quantité_produit_Panier">
+      <End Role="Panier" EntitySet="Panier" />
+      <End Role="Quantité_produit" EntitySet="Quantité_produit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Produit_Photo" Association="Self.FK_Produit_Photo">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="Produit" EntitySet="Produit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quantité_produit_Produit" Association="Self.FK_Quantité_produit_Produit">
+      <End Role="Produit" EntitySet="Produit" />
+      <End Role="Quantité_produit" EntitySet="Quantité_produit" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

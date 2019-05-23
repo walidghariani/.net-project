@@ -1,0 +1,10 @@
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Data\bin\Debug\E_commerce.Data.dll.config
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Data\bin\Debug\E_commerce.Data.dll
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Data\bin\Debug\E_commerce.Data.pdb
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Data\bin\Debug\EntityFramework.dll
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Data\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Data\bin\Debug\EntityFramework.xml
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Data\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Data\obj\Debug\E_commerce.Data.csprojResolveAssemblyReference.cache
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Data\obj\Debug\E_commerce.Data.dll
+c:\users\a_ami\documents\visual studio 2015\Projects\Ecommerce_Backend\E_commerce.Data\obj\Debug\E_commerce.Data.pdb

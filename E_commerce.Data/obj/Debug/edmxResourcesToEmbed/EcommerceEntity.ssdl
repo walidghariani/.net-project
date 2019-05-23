@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Admin">
+    <Key>
+      <PropertyRef Name="id_admin" />
+    </Key>
+    <Property Name="id_admin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="255" />
+    <Property Name="pasword" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Cataloge">
+    <Key>
+      <PropertyRef Name="id_catalogie" />
+    </Key>
+    <Property Name="id_catalogie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="varchar" MaxLength="255" />
+    <Property Name="date_de_creation" Type="date" />
+  </EntityType>
+  <EntityType Name="Commande">
+    <Key>
+      <PropertyRef Name="id_commande" />
+    </Key>
+    <Property Name="id_commande" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="date" Type="varchar" MaxLength="255" />
+    <Property Name="adresse_livraison" Type="varchar" MaxLength="255" />
+    <Property Name="delai_livraison" Type="int" />
+    <Property Name="total" Type="money" />
+    <Property Name="id_client" Type="int" />
+  </EntityType>
+  <EntityType Name="Panier">
+    <Key>
+      <PropertyRef Name="id_panier" />
+    </Key>
+    <Property Name="id_panier" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="prixtotal" Type="money" />
+    <Property Name="id_client" Type="int" />
+    <Property Name="id_cmd" Type="int" />
+  </EntityType>
+  <EntityType Name="Photo">
+    <Key>
+      <PropertyRef Name="id_photo" />
+    </Key>
+    <Property Name="id_photo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emplacement" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="Produit">
+    <Key>
+      <PropertyRef Name="id_produit" />
+    </Key>
+    <Property Name="id_produit" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nom" Type="varchar" MaxLength="255" />
+    <Property Name="prix" Type="money" />
+    <Property Name="type" Type="varchar" MaxLength="255" />
+    <Property Name="nb_produit" Type="int" />
+    <Property Name="description" Type="text" />
+    <Property Name="id_photo" Type="int" />
+    <Property Name="id_catalogue" Type="int" />
+  </EntityType>
+  <EntityType Name="Quantité_produit">
+    <Key>
+      <PropertyRef Name="id_qt" />
+    </Key>
+    <Property Name="id_qt" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="quantite_produit" Type="int" />
+    <Property Name="prix" Type="money" />
+    <Property Name="id_produit" Type="int" />
+    <Property Name="id_panier" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Utilisateur">
+    <Key>
+      <PropertyRef Name="id_client" />
+    </Key>
+    <Property Name="id_client" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="username" Type="varchar" MaxLength="255" />
+    <Property Name="nom" Type="varchar" MaxLength="255" />
+    <Property Name="prenom" Type="varchar" MaxLength="255" />
+    <Property Name="email" Type="varchar" MaxLength="255" />
+    <Property Name="adresse" Type="varchar" MaxLength="255" />
+    <Property Name="password" Type="varchar" MaxLength="255" />
+    <Property Name="tel" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Commande_Utilisateur">
+    <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="0..1" />
+    <End Role="Commande" Type="Self.Commande" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="id_client" />
+      </Principal>
+      <Dependent Role="Commande">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Panier_Commande">
+    <End Role="Commande" Type="Self.Commande" Multiplicity="0..1" />
+    <End Role="Panier" Type="Self.Panier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commande">
+        <PropertyRef Name="id_commande" />
+      </Principal>
+      <Dependent Role="Panier">
+        <PropertyRef Name="id_cmd" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Panier_Utilisateur">
+    <End Role="Utilisateur" Type="Self.Utilisateur" Multiplicity="0..1" />
+    <End Role="Panier" Type="Self.Panier" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="id_client" />
+      </Principal>
+      <Dependent Role="Panier">
+        <PropertyRef Name="id_client" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Produit_Cataloge">
+    <End Role="Cataloge" Type="Self.Cataloge" Multiplicity="0..1" />
+    <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cataloge">
+        <PropertyRef Name="id_catalogie" />
+      </Principal>
+      <Dependent Role="Produit">
+        <PropertyRef Name="id_catalogue" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Produit_Photo">
+    <End Role="Photo" Type="Self.Photo" Multiplicity="0..1" />
+    <End Role="Produit" Type="Self.Produit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Photo">
+        <PropertyRef Name="id_photo" />
+      </Principal>
+      <Dependent Role="Produit">
+        <PropertyRef Name="id_photo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quantité_produit_Panier">
+    <End Role="Panier" Type="Self.Panier" Multiplicity="0..1" />
+    <End Role="Quantité_produit" Type="Self.Quantité_produit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Panier">
+        <PropertyRef Name="id_panier" />
+      </Principal>
+      <Dependent Role="Quantité_produit">
+        <PropertyRef Name="id_panier" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Quantité_produit_Produit">
+    <End Role="Produit" Type="Self.Produit" Multiplicity="0..1" />
+    <End Role="Quantité_produit" Type="Self.Quantité_produit" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produit">
+        <PropertyRef Name="id_produit" />
+      </Principal>
+      <Dependent Role="Quantité_produit">
+        <PropertyRef Name="id_produit" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cataloge" EntityType="Self.Cataloge" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Commande" EntityType="Self.Commande" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Panier" EntityType="Self.Panier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Produit" EntityType="Self.Produit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Quantité_produit" EntityType="Self.Quantité_produit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Utilisateur" EntityType="Self.Utilisateur" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Commande_Utilisateur" Association="Self.FK_Commande_Utilisateur">
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+      <End Role="Commande" EntitySet="Commande" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Panier_Commande" Association="Self.FK_Panier_Commande">
+      <End Role="Commande" EntitySet="Commande" />
+      <End Role="Panier" EntitySet="Panier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Panier_Utilisateur" Association="Self.FK_Panier_Utilisateur">
+      <End Role="Utilisateur" EntitySet="Utilisateur" />
+      <End Role="Panier" EntitySet="Panier" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Produit_Cataloge" Association="Self.FK_Produit_Cataloge">
+      <End Role="Cataloge" EntitySet="Cataloge" />
+      <End Role="Produit" EntitySet="Produit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Produit_Photo" Association="Self.FK_Produit_Photo">
+      <End Role="Photo" EntitySet="Photo" />
+      <End Role="Produit" EntitySet="Produit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quantité_produit_Panier" Association="Self.FK_Quantité_produit_Panier">
+      <End Role="Panier" EntitySet="Panier" />
+      <End Role="Quantité_produit" EntitySet="Quantité_produit" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Quantité_produit_Produit" Association="Self.FK_Quantité_produit_Produit">
+      <End Role="Produit" EntitySet="Produit" />
+      <End Role="Quantité_produit" EntitySet="Quantité_produit" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
